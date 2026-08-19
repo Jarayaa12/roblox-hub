@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROBLOX HUB — Jogos recomendados</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0a0b10;
+    --panel:#12141d;
+    --panel-raised:#181b26;
+    --line:#262a3a;
+    --text:#e8e9f0;
+    --muted:#7d8199;
+    --epic:#b366ff;
+    --blue:#4d9fff;
+    --gold:#ffb020;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:var(--void);color:var(--text);font-family:'IBM Plex Mono',monospace;min-height:100%;}
+  body{
+    background-image:repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 3px);
+  }
+  h1,h2,h3,.display{font-family:'Chakra Petch',sans-serif;}
+  a{color:inherit;text-decoration:none;}
+
+  /* LAYOUT SHELL */
+  .page{display:flex;justify-content:center;gap:20px;padding:0 16px;}
+  .rail{width:160px;flex-shrink:0;position:sticky;top:20px;align-self:flex-start;}
+  @media(max-width:1100px){.rail{display:none;}}
+  .ad-slot{
+    border:1px dashed var(--line);
+    background:var(--panel);
+    border-radius:4px;
+    color:var(--muted);
+    font-size:10px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;padding:10px;
+  }
+  .rail .ad-slot{height:600px;}
+  .ad-slot-horizontal{max-width:728px;margin:36px auto;height:90px;}
+
+  .content{max-width:900px;width:100%;padding-bottom:80px;}
+
+  /* HERO */
+  header.hero{
+    padding:52px 20px 34px;text-align:center;
+    border-bottom:1px solid var(--line);
+    background:radial-gradient(ellipse 60% 80% at 50% 0%, rgba(179,102,255,0.12), transparent 70%);
+  }
+  .eyebrow{font-size:11px;letter-spacing:.25em;color:var(--muted);text-transform:uppercase;margin-bottom:14px;}
+  .eyebrow::before{content:"▸ ";color:var(--epic);}
+  h1.display{
+    font-size:clamp(32px,6vw,50px);font-weight:700;letter-spacing:.02em;line-height:1;
+    background:linear-gradient(180deg,#fff,#b8bcd0);-webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  h1.display .gem{color:var(--epic);-webkit-text-fill-color:var(--epic);}
+  .sub{max-width:480px;margin:16px auto 0;color:var(--muted);font-size:14px;line-height:1.6;}
+
+  .section-label{display:flex;align-items:center;gap:10px;margin:52px 20px 18px;font-family:'Chakra Petch',sans-serif;font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
+  .section-label::after{content:"";flex:1;height:1px;background:var(--line);}
+  .section-sub{margin:-10px 20px 20px;color:var(--muted);font-size:12px;}
+
+  /* GAME CARDS - row of 3, each with its own RGB frame */
+  .game-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:0 20px;}
+  @media(max-width:720px){.game-row{grid-template-columns:1fr;}}
+
+  .card-frame{
+    position:relative;
+    border-radius:12px;
+    padding:3px;
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .card-frame::before{
+    content:"";
+    position:absolute;
+    top:-60%;left:-60%;
+    width:220%;height:220%;
+    background:conic-gradient(from 0deg,
+      #ff2d6b, #ff9f2d, #f7ff2d, #39ff88, #2dd8ff, #7a5bff, #ff2d6b);
+    animation:rgb-spin 4.5s linear infinite;
+    z-index:0;
+  }
+  .card-frame:nth-child(2)::before{animation-duration:5.2s;animation-direction:reverse;}
+  .card-frame:nth-child(3)::before{animation-duration:6s;}
+  @keyframes rgb-spin{to{transform:rotate(360deg);}}
+  @media (prefers-reduced-motion: reduce){
+    .card-frame::before{animation:none;}
+  }
+
+  .game-card{
+    position:relative;
+    z-index:1;
+    background:var(--panel-raised);
+    display:flex;flex-direction:column;
+    border-radius:9px;
+    overflow:hidden;
+    height:100%;
+  }
+
+  .cover{width:100%;aspect-ratio:16/9;display:block;position:relative;overflow:hidden;}
+  .cover svg{width:100%;height:100%;display:block;}
+
+  .game-info{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1;}
+  .game-title{font-family:'Chakra Petch',sans-serif;font-size:16px;font-weight:600;line-height:1.25;}
+  .game-dev{font-size:10.5px;color:var(--muted);}
+  .game-genre{font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--epic);border:1px solid var(--epic);display:inline-block;padding:2px 7px;border-radius:3px;width:fit-content;}
+  .game-blurb{font-size:12px;color:#b8bcd0;line-height:1.5;flex:1;}
+  .play-btn{
+    margin-top:4px;display:inline-flex;align-items:center;justify-content:center;gap:6px;
+    background:var(--epic);color:#0a0b10;padding:10px;border-radius:3px;
+    font-family:'Chakra Petch',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:11.5px;
+    transition:filter .12s ease, transform .12s ease;
+  }
+  .play-btn:hover{filter:brightness(1.12);transform:translateY(-1px);}
+
+  /* GAME OF THE DAY */
+  .day-card{
+    margin:0 20px;border:1px solid var(--gold);border-radius:6px;overflow:hidden;
+    background:var(--panel-raised);
+    display:grid;grid-template-columns:1.3fr 1fr;
+    box-shadow:0 0 30px rgba(255,176,32,0.08);
+  }
+  @media(max-width:640px){.day-card{grid-template-columns:1fr;}}
+  .day-cover{aspect-ratio:16/9;overflow:hidden;}
+  .day-cover svg{width:100%;height:100%;display:block;}
+  .day-info{padding:22px;display:flex;flex-direction:column;gap:10px;justify-content:center;}
+  .day-badge{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);padding:3px 9px;border-radius:3px;width:fit-content;}
+  .day-title{font-family:'Chakra Petch',sans-serif;font-size:24px;font-weight:700;}
+  .day-blurb{font-size:12.5px;color:#b8bcd0;line-height:1.6;}
+  .day-play{margin-top:6px;background:var(--gold);color:#0a0b10;padding:12px 18px;border-radius:3px;font-family:'Chakra Petch',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:12px;width:fit-content;}
+  .day-play:hover{filter:brightness(1.1);}
+
+  /* RANDOM GAME */
+  .random-panel{
+    margin:0 20px;border:1px solid var(--line);border-radius:6px;background:var(--panel);
+    padding:40px 24px;text-align:center;
+    background-image:radial-gradient(ellipse 70% 100% at 50% 0%, rgba(77,159,255,0.1), transparent 70%);
+  }
+  .random-title{font-family:'Chakra Petch',sans-serif;font-size:20px;font-weight:700;margin-bottom:8px;}
+  .random-desc{color:var(--muted);font-size:12.5px;margin-bottom:24px;}
+  .random-btn{
+    background:transparent;border:2px solid var(--blue);color:var(--blue);
+    padding:16px 34px;border-radius:4px;font-family:'Chakra Petch',sans-serif;font-weight:700;
+    letter-spacing:.1em;text-transform:uppercase;font-size:14px;cursor:pointer;
+    transition:all .15s ease;
+  }
+  .random-btn:hover{background:var(--blue);color:#0a0b10;box-shadow:0 0 24px rgba(77,159,255,0.35);}
+  .random-btn:active{transform:scale(0.98);}
+  .random-result{margin-top:18px;font-size:12.5px;color:var(--muted);min-height:18px;}
+  .random-result strong{color:var(--blue);}
+
+
+  /* JARAYA BRANDING */
+  .creator-bar{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    margin:0 auto;
+    padding:12px 20px;
+    border-bottom:1px solid var(--line);
+    background:rgba(18,20,29,.72);
+  }
+  .creator-mark{
+    width:32px;
+    height:32px;
+    border:1px solid var(--epic);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Chakra Petch',sans-serif;
+    font-size:12px;
+    font-weight:700;
+    color:var(--epic);
+    background:rgba(179,102,255,.08);
+    box-shadow:0 0 18px rgba(179,102,255,.12);
+  }
+  .creator-name{
+    font-family:'Chakra Petch',sans-serif;
+    font-weight:700;
+    letter-spacing:.08em;
+    font-size:13px;
+  }
+  .creator-name span{color:var(--epic);}
+  .youtube-link{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:7px 11px;
+    border:1px solid #3a3e50;
+    border-radius:4px;
+    color:#c8cad6;
+    font-family:'Chakra Petch',sans-serif;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    transition:all .15s ease;
+  }
+  .youtube-link:hover{
+    border-color:#ff4b55;
+    color:#fff;
+    background:rgba(255,75,85,.08);
+    transform:translateY(-1px);
+  }
+  .youtube-icon{
+    width:14px;
+    height:10px;
+    border-radius:3px;
+    background:#ff4b55;
+    position:relative;
+    display:inline-block;
+  }
+  .youtube-icon::after{
+    content:"";
+    position:absolute;
+    left:5px;
+    top:3px;
+    border-left:4px solid #fff;
+    border-top:2px solid transparent;
+    border-bottom:2px solid transparent;
+  }
+  .creator-credit{
+    margin-top:10px;
+    font-size:10px;
+    color:var(--muted);
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+  .creator-credit strong{color:#c8cad6;}
+  @media(max-width:520px){
+    .creator-bar{gap:8px;padding:10px 12px;}
+    .youtube-link{font-size:9px;padding:6px 8px;}
+    .creator-name{font-size:11px;}
+  }
+
+  footer{text-align:center;color:var(--muted);font-size:11px;padding:30px 20px 0;}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="rail">
+    <div class="ad-slot">ESPAÇO<br>PUBLICITÁRIO<br>300×600</div>
+  </div>
+
+  <div class="content">
+
+    <div class="creator-bar">
+      <div class="creator-mark">J</div>
+      <div class="creator-name">por <span>JARAYA</span></div>
+      <a class="youtube-link" href="https://www.youtube.com/@Jarayaa" target="_blank" rel="noopener noreferrer" aria-label="Canal do Jaraya no YouTube">
+        <span class="youtube-icon"></span>
+        Meu YouTube
+      </a>
+    </div>
+
+    <header class="hero">
+      <div class="eyebrow">Vitrine de jogos Roblox</div>
+      <h1 class="display">ROBLOX<span class="gem">•</span>HUB</h1>
+      <p class="sub">Uma seleção fixa de jogos pra você jogar agora — sem cadastro, sem enrolação. Só escolher e entrar.</p>
+      <div class="creator-credit">Curadoria de <strong>Jaraya</strong> · acompanhe no YouTube</div>
+    </header>
+
+    <div class="ad-slot ad-slot-horizontal">ESPAÇO PUBLICITÁRIO — 728×90</div>
+
+    <!-- BLOCO 1: JOGOS RECOMENDADOS -->
+    <div class="section-label">Bloco 1 · Jogos recomendados</div>
+    <div class="section-sub">Três jogos, três estilos diferentes.</div>
+    <div class="game-row" id="recommended-row"></div>
+
+    <!-- BLOCO 2: JOGO DO DIA -->
+    <div class="section-label">Bloco 2 · Jogo do dia</div>
+    <div class="section-sub">Muda automaticamente a cada dia.</div>
+    <div class="day-card" id="day-card"></div>
+
+    <div class="ad-slot ad-slot-horizontal">ESPAÇO PUBLICITÁRIO — 728×90</div>
+
+    <!-- BLOCO 3: JOGO ALEATÓRIO -->
+    <div class="section-label">Bloco 3 · Jogo aleatório</div>
+    <div class="section-sub">Não sabe o que jogar? Deixa o hub escolher.</div>
+    <div class="random-panel">
+      <div class="random-title">Sem ideia do que jogar hoje?</div>
+      <div class="random-desc">Clique no botão e você será direcionado para um jogo aleatório do Roblox.</div>
+      <button class="random-btn" id="random-btn">🎲 Jogo aleatório</button>
+      <div class="random-result" id="random-result"></div>
+    </div>
+
+    <footer>
+    Criado por <strong>Jaraya</strong> ·
+    <a href="https://www.youtube.com/@Jarayaa" target="_blank" rel="noopener noreferrer">YouTube</a><br>
+    Links direcionam para o roblox.com. ROBLOX HUB não é afiliado à Roblox Corporation.
+  </footer>
+  </div>
+
+  <div class="rail">
+    <div class="ad-slot">ESPAÇO<br>PUBLICITÁRIO<br>300×600</div>
+  </div>
+
+</div>
+
+<script>
+// ---- COVER ART (original geometric illustrations, not game screenshots) ----
+function coverJailbreak(){
+  return `<svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+    <defs><linearGradient id="gj" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a2140"/><stop offset="100%" stop-color="#0a0d1a"/>
+    </linearGradient></defs>
+    <rect width="400" height="225" fill="url(#gj)"/>
+    <circle cx="330" cy="45" r="55" fill="#ff3b57" opacity="0.15"/>
+    <circle cx="330" cy="45" r="20" fill="#4d9fff" opacity="0.5"/>
+    <g opacity="0.9">
+      <rect x="0" y="150" width="400" height="10" fill="#232840"/>
+      ${Array.from({length:14}).map((_,i)=>`<rect x="${i*30}" y="120" width="6" height="40" fill="#3a4066"/>`).join('')}
+    </g>
+    <rect x="60" y="165" width="150" height="35" rx="6" fill="#3652ff"/>
+    <rect x="60" y="165" width="150" height="12" fill="#ffb020"/>
+    <circle cx="90" cy="205" r="10" fill="#111"/>
+    <circle cx="180" cy="205" r="10" fill="#111"/>
+    <text x="20" y="30" font-family="Chakra Petch" font-size="15" fill="#4d9fff" letter-spacing="2">SEASON 33</text>
+  </svg>`;
+}
+function coverApocalypse(){
+  return `<svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+    <defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2b2013"/><stop offset="100%" stop-color="#100c07"/>
+    </linearGradient></defs>
+    <rect width="400" height="225" fill="url(#ga)"/>
+    <circle cx="80" cy="55" r="40" fill="#ffb020" opacity="0.12"/>
+    <g stroke="#ff6b3d" stroke-width="2" opacity="0.4">
+      <line x1="0" y1="180" x2="400" y2="150"/>
+      <line x1="0" y1="200" x2="400" y2="185"/>
+    </g>
+    <g transform="translate(200,110)" fill="#c9c2b0">
+      <circle r="34"/>
+      <circle cx="-13" cy="-6" r="7" fill="#100c07"/>
+      <circle cx="13" cy="-6" r="7" fill="#100c07"/>
+      <path d="M -10 16 Q 0 26 10 16" stroke="#100c07" stroke-width="4" fill="none"/>
+      <path d="M -18 -20 L -6 -30 M 18 -20 L 6 -30" stroke="#100c07" stroke-width="4"/>
+    </g>
+    <text x="20" y="205" font-family="Chakra Petch" font-size="13" fill="#ff6b3d" letter-spacing="2">SURVIVAL SHOOTER</text>
+  </svg>`;
+}
+function coverWizard(){
+  return `<svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+    <defs><linearGradient id="gw" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a2340"/><stop offset="60%" stop-color="#7a4a2a"/><stop offset="100%" stop-color="#c98a3f"/>
+    </linearGradient></defs>
+    <rect width="400" height="225" fill="url(#gw)"/>
+    <circle cx="330" cy="40" r="24" fill="#ffe3a0" opacity="0.8"/>
+    <g fill="#1c1220" opacity="0.85">
+      <ellipse cx="200" cy="190" rx="220" ry="35"/>
+    </g>
+    <g transform="translate(210,150)">
+      <path d="M -25 30 L 0 -40 L 25 30 Z" fill="#4a2e1a"/>
+      <ellipse cx="0" cy="30" rx="34" ry="8" fill="#3a2314"/>
+      <path d="M -3 -40 L 20 -55" stroke="#b366ff" stroke-width="4"/>
+      <circle cx="20" cy="-55" r="4" fill="#b366ff"/>
+    </g>
+    <g stroke="#ffe3a0" stroke-width="2" opacity="0.7">
+      <line x1="80" y1="60" x2="86" y2="66"/><line x1="80" y1="66" x2="86" y2="60"/>
+      <line x1="300" y1="90" x2="308" y2="98"/><line x1="300" y1="98" x2="308" y2="90"/>
+    </g>
+    <text x="20" y="205" font-family="Chakra Petch" font-size="13" fill="#ffe3a0" letter-spacing="2">FAR WEST FANTASY</text>
+  </svg>`;
+}
+
+// ---- GAME DATA (real Roblox links) ----
+const FEATURED = [
+  {
+    id:'jailbreak', title:'Jailbreak', dev:'Badimo', genre:'Ação / Mundo aberto',
+    blurb:'Vire policial ou fugitivo em um mundo aberto com carros, roubos e perseguições. Um clássico do Roblox desde 2017.',
+    link:'https://www.roblox.com/games/606849621/Jailbreak', cover:coverJailbreak
+  },
+  {
+    id:'ar2', title:'Apocalipse em Ascensão 2', dev:'Dualpoint Interactive', genre:'Sobrevivência / Zumbi',
+    blurb:'Sobreviva sozinho ou em grupo num arquipélago pós-apocalíptico, catando armas e fugindo dos infectados.',
+    link:'https://www.roblox.com/games/863266079/Apocalypse-Rising-2', cover:coverApocalypse
+  },
+  {
+    id:'wizardwest', title:'Mago Oeste', dev:"REDD's Wastelands", genre:'RPG / Fantasia',
+    blurb:'Combate mágico num cenário de faroeste: duelos com varinhas, vassouras voadoras e feitiços pra dominar.',
+    link:'https://www.roblox.com/games/17357719939/Wizard-West', cover:coverWizard
+  }
+];
+
+const RANDOM_POOL = [
+  ...FEATURED,
+  {title:'Adopt Me!', link:'https://www.roblox.com/games/920587237/Adopt-Me'},
+  {title:'Blox Fruits', link:'https://www.roblox.com/games/2753915549/Blox-Fruits'},
+  {title:'Tower of Hell', link:'https://www.roblox.com/games/1962086868/Tower-of-Hell'},
+  {title:'Piggy', link:'https://www.roblox.com/games/4623386862/Piggy'},
+  {title:'Brookhaven RP', link:'https://www.roblox.com/games/4924922222/Brookhaven-RP'}
+];
+
+// ---- RENDER BLOCO 1 ----
+const row = document.getElementById('recommended-row');
+row.innerHTML = FEATURED.map(g => `
+  <div class="game-card">
+    <div class="cover">${g.cover()}</div>
+    <div class="game-info">
+      <div class="game-title">${g.title}</div>
+      <div class="game-dev">por ${g.dev}</div>
+      <div class="game-genre">${g.genre}</div>
+      <div class="game-blurb">${g.blurb}</div>
+      <a class="play-btn" href="${g.link}" target="_blank" rel="noopener noreferrer">Jogar ▶</a>
+    </div>
+  </div>
+`).join('');
+
+// ---- RENDER BLOCO 2 (game of the day — rotates daily) ----
+function dayIndex(){
+  const now = new Date();
+  const start = new Date(now.getFullYear(), 0, 0);
+  const diff = now - start;
+  const dayOfYear = Math.floor(diff / 86400000);
+  return dayOfYear % FEATURED.length;
+}
+const todayGame = FEATURED[dayIndex()];
+document.getElementById('day-card').innerHTML = `
+  <div class="day-cover">${todayGame.cover()}</div>
+  <div class="day-info">
+    <div class="day-badge">★ Escolha de hoje</div>
+    <div class="day-title">${todayGame.title}</div>
+    <div class="day-blurb">${todayGame.blurb}</div>
+    <a class="day-play" href="${todayGame.link}" target="_blank" rel="noopener noreferrer">Jogar agora ▶</a>
+  </div>
+`;
+
+// ---- BLOCO 3 (random game button) ----
+const randomBtn = document.getElementById('random-btn');
+const randomResult = document.getElementById('random-result');
+randomBtn.addEventListener('click', () => {
+  randomBtn.disabled = true;
+  let ticks = 0;
+  const maxTicks = 10;
+  const interval = setInterval(() => {
+    const pick = RANDOM_POOL[Math.floor(Math.random() * RANDOM_POOL.length)];
+    randomResult.innerHTML = `Sorteando... <strong>${pick.title}</strong>`;
+    ticks++;
+    if(ticks >= maxTicks){
+      clearInterval(interval);
+      const finalPick = RANDOM_POOL[Math.floor(Math.random() * RANDOM_POOL.length)];
+      randomResult.innerHTML = `Escolhido: <strong>${finalPick.title}</strong> — abrindo...`;
+      setTimeout(() => {
+        window.open(finalPick.link, '_blank', 'noopener,noreferrer');
+        randomBtn.disabled = false;
+      }, 500);
+    }
+  }, 90);
+});
+</script>
+</body>
+</html>
