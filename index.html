@@ -3,315 +3,348 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ROBLOX HUB — Jogos recomendados</title>
+<title>ROBLOX HUB — Jogos Recomendados</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --void:#0a0b10;
-    --panel:#12141d;
-    --panel-raised:#181b26;
-    --line:#262a3a;
-    --text:#e8e9f0;
-    --muted:#7d8199;
-    --epic:#b366ff;
-    --blue:#4d9fff;
-    --gold:#ffb020;
+  :root {
+    --void: #0a0b10;
+    --panel: #12141d;
+    --panel-raised: #181b26;
+    --line: #262a3a;
+    --text: #e8e9f0;
+    --muted: #7d8199;
+    --epic: #b366ff;
+    --blue: #4d9fff;
+    --gold: #ffb020;
   }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html,body{background:var(--void);color:var(--text);font-family:'IBM Plex Mono',monospace;min-height:100%;}
-  body{
-    background-image:repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 3px);
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  html, body {
+    background: var(--void);
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    min-height: 100%;
+    overflow-x: hidden;
   }
-  h1,h2,h3,.display{font-family:'Chakra Petch',sans-serif;}
-  a{color:inherit;text-decoration:none;}
+  
+  body {
+    background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px);
+  }
+  
+  h1, h2, h3, .display { font-family: 'Chakra Petch', sans-serif; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ANIMAÇÃO DE ENTRADA */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-in {
+    opacity: 0;
+    animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .d-1 { animation-delay: 0.1s; }
+  .d-2 { animation-delay: 0.2s; }
+  .d-3 { animation-delay: 0.3s; }
+  .d-4 { animation-delay: 0.4s; }
+  .d-5 { animation-delay: 0.5s; }
 
   /* LAYOUT SHELL */
-  .page{display:flex;justify-content:center;gap:20px;padding:0 16px;}
-  .rail{width:160px;flex-shrink:0;position:sticky;top:20px;align-self:flex-start;}
-  @media(max-width:1100px){.rail{display:none;}}
-  .ad-slot{
-    border:1px dashed var(--line);
-    background:var(--panel);
-    border-radius:4px;
-    color:var(--muted);
-    font-size:10px;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    display:flex;align-items:center;justify-content:center;
-    text-align:center;padding:10px;
+  .page { display: flex; justify-content: center; gap: 20px; padding: 0 16px; }
+  .rail { width: 160px; flex-shrink: 0; position: sticky; top: 20px; align-self: flex-start; }
+  @media(max-width:1100px) { .rail { display: none; } }
+  
+  .ad-slot {
+    border: 1px dashed var(--line);
+    background: var(--panel);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 10px;
+    transition: border-color 0.3s ease;
   }
-  .rail .ad-slot{height:600px;}
-  .ad-slot-horizontal{max-width:728px;margin:36px auto;height:90px;}
+  .ad-slot:hover { border-color: #3a3f58; }
+  .rail .ad-slot { height: 600px; }
+  .ad-slot-horizontal { max-width: 728px; margin: 40px auto; height: 90px; }
 
-  .content{max-width:900px;width:100%;padding-bottom:80px;}
+  .content { max-width: 900px; width: 100%; padding-bottom: 80px; }
 
   /* HERO */
-  header.hero{
-    padding:52px 20px 34px;text-align:center;
-    border-bottom:1px solid var(--line);
-    background:radial-gradient(ellipse 60% 80% at 50% 0%, rgba(179,102,255,0.12), transparent 70%);
+  header.hero {
+    padding: 60px 20px 40px; text-align: center;
+    border-bottom: 1px solid var(--line);
+    background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(179,102,255,0.12), transparent 70%);
   }
-  .eyebrow{font-size:11px;letter-spacing:.25em;color:var(--muted);text-transform:uppercase;margin-bottom:14px;}
-  .eyebrow::before{content:"▸ ";color:var(--epic);}
-  h1.display{
-    font-size:clamp(32px,6vw,50px);font-weight:700;letter-spacing:.02em;line-height:1;
-    background:linear-gradient(180deg,#fff,#b8bcd0);-webkit-background-clip:text;background-clip:text;color:transparent;
+  .eyebrow { font-size: 11px; letter-spacing: .25em; color: var(--muted); text-transform: uppercase; margin-bottom: 16px; }
+  .eyebrow::before { content: "▸ "; color: var(--epic); }
+  
+  h1.display {
+    font-size: clamp(36px, 6vw, 56px); font-weight: 700; letter-spacing: .02em; line-height: 1;
+    background: linear-gradient(180deg, #fff 30%, #a4a9c2);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    text-shadow: 0 10px 30px rgba(179,102,255,0.15);
   }
-  h1.display .gem{color:var(--epic);-webkit-text-fill-color:var(--epic);}
-  .sub{max-width:480px;margin:16px auto 0;color:var(--muted);font-size:14px;line-height:1.6;}
+  h1.display .gem { color: var(--epic); -webkit-text-fill-color: var(--epic); }
+  
+  .sub { max-width: 520px; margin: 20px auto 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
 
-  .section-label{display:flex;align-items:center;gap:10px;margin:52px 20px 18px;font-family:'Chakra Petch',sans-serif;font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
-  .section-label::after{content:"";flex:1;height:1px;background:var(--line);}
-  .section-sub{margin:-10px 20px 20px;color:var(--muted);font-size:12px;}
-
-  /* GAME CARDS - row of 3, each with its own RGB frame */
-  .game-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:0 20px;}
-  @media(max-width:720px){.game-row{grid-template-columns:1fr;}}
-
-  .card-frame{
-    position:relative;
-    border-radius:12px;
-    padding:3px;
-    overflow:hidden;
-    isolation:isolate;
+  /* TÍTULOS DE SEÇÃO */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 60px 20px 8px;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
   }
-  .card-frame::before{
-    content:"";
-    position:absolute;
-    top:-60%;left:-60%;
-    width:220%;height:220%;
-    background:conic-gradient(from 0deg,
-      #ff2d6b, #ff9f2d, #f7ff2d, #39ff88, #2dd8ff, #7a5bff, #ff2d6b);
-    animation:rgb-spin 4.5s linear infinite;
-    z-index:0;
+  .section-label::before {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 28px;
+    background: var(--epic);
+    border-radius: 4px;
+    box-shadow: 0 0 12px rgba(179,102,255,0.5);
   }
-  .card-frame:nth-child(2)::before{animation-duration:5.2s;animation-direction:reverse;}
-  .card-frame:nth-child(3)::before{animation-duration:6s;}
-  @keyframes rgb-spin{to{transform:rotate(360deg);}}
-  @media (prefers-reduced-motion: reduce){
-    .card-frame::before{animation:none;}
+  .section-sub { margin: 0 20px 24px; color: var(--muted); font-size: 13px; padding-left: 18px; }
+
+  /* GAME CARDS */
+  .game-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 0 20px; }
+  @media(max-width:720px) { .game-row { grid-template-columns: 1fr; } }
+
+  .card-frame {
+    position: relative;
+    border-radius: 12px;
+    padding: 3px;
+    overflow: hidden;
+    isolation: isolate;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+  }
+  
+  .card-frame:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 20px rgba(179,102,255,0.2);
+    z-index: 10;
   }
 
-  .game-card{
-    position:relative;
-    z-index:1;
-    background:var(--panel-raised);
-    display:flex;flex-direction:column;
-    border-radius:9px;
-    overflow:hidden;
-    height:100%;
+  .card-frame::before {
+    content: ""; position: absolute; top: -60%; left: -60%; width: 220%; height: 220%;
+    background: conic-gradient(from 0deg, #ff2d6b, #ff9f2d, #f7ff2d, #39ff88, #2dd8ff, #7a5bff, #ff2d6b);
+    animation: rgb-spin 4.5s linear infinite; z-index: 0;
+    opacity: 0.7; transition: opacity 0.3s ease;
+  }
+  .card-frame:hover::before { opacity: 1; }
+  .card-frame:nth-child(2)::before { animation-duration: 5.2s; animation-direction: reverse; }
+  .card-frame:nth-child(3)::before { animation-duration: 6s; }
+  
+  @keyframes rgb-spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .card-frame::before { animation: none; } }
+
+  .game-card {
+    position: relative; z-index: 1;
+    background: var(--panel-raised);
+    display: flex; flex-direction: column;
+    border-radius: 9px; overflow: hidden;
+    height: 100%;
   }
 
-  .cover{width:100%;aspect-ratio:16/9;display:block;position:relative;overflow:hidden;}
-  .cover svg{width:100%;height:100%;display:block;}
+  .cover { width: 100%; aspect-ratio: 16/9; display: block; position: relative; overflow: hidden; }
+  .cover svg { width: 100%; height: 100%; display: block; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .card-frame:hover .cover svg { transform: scale(1.08); }
 
-  .game-info{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1;}
-  .game-title{font-family:'Chakra Petch',sans-serif;font-size:16px;font-weight:600;line-height:1.25;}
-  .game-dev{font-size:10.5px;color:var(--muted);}
-  .game-genre{font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--epic);border:1px solid var(--epic);display:inline-block;padding:2px 7px;border-radius:3px;width:fit-content;}
-  .game-blurb{font-size:12px;color:#b8bcd0;line-height:1.5;flex:1;}
-  .play-btn{
-    margin-top:4px;display:inline-flex;align-items:center;justify-content:center;gap:6px;
-    background:var(--epic);color:#0a0b10;padding:10px;border-radius:3px;
-    font-family:'Chakra Petch',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:11.5px;
-    transition:filter .12s ease, transform .12s ease;
+  .game-info { padding: 20px 16px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .game-title { font-family: 'Chakra Petch', sans-serif; font-size: 18px; font-weight: 600; line-height: 1.25; color: #fff; }
+  .game-dev { font-size: 11px; color: var(--muted); margin-top: -6px; }
+  
+  .game-genre {
+    font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--epic); border: 1px solid rgba(179,102,255,0.3);
+    background: rgba(179,102,255,0.05); display: inline-block;
+    padding: 3px 8px; border-radius: 4px; width: fit-content;
   }
-  .play-btn:hover{filter:brightness(1.12);transform:translateY(-1px);}
+  
+  .game-blurb { font-size: 13px; color: #a4a9c2; line-height: 1.5; flex: 1; }
+  
+  .play-btn {
+    margin-top: 8px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--epic); color: #0a0b10; padding: 12px; border-radius: 4px;
+    font-family: 'Chakra Petch', sans-serif; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: 12.5px;
+    transition: all .2s ease;
+  }
+  .play-btn:hover { background: #c685ff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(179,102,255,0.3); }
 
   /* GAME OF THE DAY */
-  .day-card{
-    margin:0 20px;border:1px solid var(--gold);border-radius:6px;overflow:hidden;
-    background:var(--panel-raised);
-    display:grid;grid-template-columns:1.3fr 1fr;
-    box-shadow:0 0 30px rgba(255,176,32,0.08);
+  .day-card {
+    margin: 0 20px; border: 1px solid rgba(255,176,32,0.3); border-radius: 12px; overflow: hidden;
+    background: linear-gradient(135deg, var(--panel-raised), #1a1712);
+    display: grid; grid-template-columns: 1.4fr 1fr;
+    box-shadow: 0 10px 30px rgba(255,176,32,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  @media(max-width:640px){.day-card{grid-template-columns:1fr;}}
-  .day-cover{aspect-ratio:16/9;overflow:hidden;}
-  .day-cover svg{width:100%;height:100%;display:block;}
-  .day-info{padding:22px;display:flex;flex-direction:column;gap:10px;justify-content:center;}
-  .day-badge{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);padding:3px 9px;border-radius:3px;width:fit-content;}
-  .day-title{font-family:'Chakra Petch',sans-serif;font-size:24px;font-weight:700;}
-  .day-blurb{font-size:12.5px;color:#b8bcd0;line-height:1.6;}
-  .day-play{margin-top:6px;background:var(--gold);color:#0a0b10;padding:12px 18px;border-radius:3px;font-family:'Chakra Petch',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:12px;width:fit-content;}
-  .day-play:hover{filter:brightness(1.1);}
+  .day-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(255,176,32,0.15);
+    border-color: var(--gold);
+  }
+  @media(max-width:640px) { .day-card { grid-template-columns: 1fr; } }
+  
+  .day-cover { aspect-ratio: 16/9; overflow: hidden; }
+  .day-cover svg { width: 100%; height: 100%; display: block; transition: transform 0.5s ease; }
+  .day-card:hover .day-cover svg { transform: scale(1.05); }
+  
+  .day-info { padding: 30px; display: flex; flex-direction: column; gap: 12px; justify-content: center; }
+  .day-badge {
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid var(--gold); background: rgba(255,176,32,0.05);
+    padding: 4px 10px; border-radius: 4px; width: fit-content;
+  }
+  .day-title { font-family: 'Chakra Petch', sans-serif; font-size: 28px; font-weight: 700; color: #fff; }
+  .day-blurb { font-size: 14px; color: #a4a9c2; line-height: 1.6; }
+  
+  .day-play {
+    margin-top: 10px; background: var(--gold); color: #0a0b10; padding: 14px 22px; border-radius: 4px;
+    font-family: 'Chakra Petch', sans-serif; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: 13px; width: fit-content;
+    transition: all 0.2s ease;
+  }
+  .day-play:hover { background: #ffc24d; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(255,176,32,0.3); }
 
   /* RANDOM GAME */
-  .random-panel{
-    margin:0 20px;border:1px solid var(--line);border-radius:6px;background:var(--panel);
-    padding:40px 24px;text-align:center;
-    background-image:radial-gradient(ellipse 70% 100% at 50% 0%, rgba(77,159,255,0.1), transparent 70%);
+  .random-panel {
+    margin: 0 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel);
+    padding: 50px 24px; text-align: center;
+    background-image: radial-gradient(ellipse 70% 100% at 50% 0%, rgba(77,159,255,0.08), transparent 70%);
+    transition: border-color 0.3s ease;
   }
-  .random-title{font-family:'Chakra Petch',sans-serif;font-size:20px;font-weight:700;margin-bottom:8px;}
-  .random-desc{color:var(--muted);font-size:12.5px;margin-bottom:24px;}
-  .random-btn{
-    background:transparent;border:2px solid var(--blue);color:var(--blue);
-    padding:16px 34px;border-radius:4px;font-family:'Chakra Petch',sans-serif;font-weight:700;
-    letter-spacing:.1em;text-transform:uppercase;font-size:14px;cursor:pointer;
-    transition:all .15s ease;
+  .random-panel:hover { border-color: #3a3f58; }
+  
+  .random-title { font-family: 'Chakra Petch', sans-serif; font-size: 24px; font-weight: 700; margin-bottom: 10px; color: #fff; }
+  .random-desc { color: var(--muted); font-size: 14px; margin-bottom: 30px; }
+  
+  .random-btn {
+    background: rgba(77,159,255,0.05); border: 2px solid var(--blue); color: var(--blue);
+    padding: 18px 40px; border-radius: 6px; font-family: 'Chakra Petch', sans-serif; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase; font-size: 15px; cursor: pointer;
+    transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
-  .random-btn:hover{background:var(--blue);color:#0a0b10;box-shadow:0 0 24px rgba(77,159,255,0.35);}
-  .random-btn:active{transform:scale(0.98);}
-  .random-result{margin-top:18px;font-size:12.5px;color:var(--muted);min-height:18px;}
-  .random-result strong{color:var(--blue);}
+  .random-btn:hover { background: var(--blue); color: #0a0b10; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(77,159,255,0.35); }
+  .random-btn:active { transform: scale(0.95); }
+  
+  .random-result { margin-top: 24px; font-size: 14px; color: var(--muted); min-height: 20px; }
+  .random-result strong { color: var(--blue); font-size: 15px; }
 
-
-  /* JARAYA BRANDING */
-  .creator-bar{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:12px;
-    margin:0 auto;
-    padding:12px 20px;
-    border-bottom:1px solid var(--line);
-    background:rgba(18,20,29,.72);
+  /* BRANDING & AVATAR */
+  .creator-bar {
+    display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0 auto;
+    padding: 14px 20px; border-bottom: 1px solid var(--line); background: rgba(18,20,29,.85); backdrop-filter: blur(10px);
   }
-  .creator-mark{
-  width:32px;
-  height:32px;
-  border:1px solid var(--epic);
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  /* ADICIONE ESTAS DUAS LINHAS: */
-  background-image: url(https://imgur.com/a/fA7YqA8);
-  background-size: cover;
-  /* -------------------------- */
-  font-family:'Chakra Petch',sans-serif;
-  font-size:12px;
-  font-weight:700;
-  color:var(--epic);
-  box-shadow:0 0 18px rgba(179,102,255,.12);
+  
+  /* Ajustes feitos aqui para a imagem */
+  .creator-mark {
+    width: 36px; height: 36px; 
+    border: 1px solid var(--epic); 
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; 
+    background: rgba(179,102,255,.08);
+    box-shadow: 0 0 18px rgba(179,102,255,.15);
+    overflow: hidden; /* Isso garante que a imagem não vaze para fora do círculo */
   }
-  .creator-name{
-    font-family:'Chakra Petch',sans-serif;
-    font-weight:700;
-    letter-spacing:.08em;
-    font-size:13px;
-  }
-  .creator-name span{color:var(--epic);}
-  .youtube-link{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    padding:7px 11px;
-    border:1px solid #3a3e50;
-    border-radius:4px;
-    color:#c8cad6;
-    font-family:'Chakra Petch',sans-serif;
-    font-size:10px;
-    font-weight:600;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    transition:all .15s ease;
-  }
-  .youtube-link:hover{
-    border-color:#ff4b55;
-    color:#fff;
-    background:rgba(255,75,85,.08);
-    transform:translateY(-1px);
-  }
-  .youtube-icon{
-    width:14px;
-    height:10px;
-    border-radius:3px;
-    background:#ff4b55;
-    position:relative;
-    display:inline-block;
-  }
-  .youtube-icon::after{
-    content:"";
-    position:absolute;
-    left:5px;
-    top:3px;
-    border-left:4px solid #fff;
-    border-top:2px solid transparent;
-    border-bottom:2px solid transparent;
-  }
-  .creator-credit{
-    margin-top:10px;
-    font-size:10px;
-    color:var(--muted);
-    letter-spacing:.08em;
-    text-transform:uppercase;
-  }
-  .creator-credit strong{color:#c8cad6;}
-  @media(max-width:520px){
-    .creator-bar{gap:8px;padding:10px 12px;}
-    .youtube-link{font-size:9px;padding:6px 8px;}
-    .creator-name{font-size:11px;}
+  .creator-mark img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Faz a imagem preencher perfeitamente o círculo */
   }
 
-  footer{text-align:center;color:var(--muted);font-size:11px;padding:30px 20px 0;}
+  .creator-name { font-family: 'Chakra Petch', sans-serif; font-weight: 700; letter-spacing: .08em; font-size: 14px; }
+  .creator-name span { color: var(--epic); }
+  
+  .youtube-link {
+    display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px;
+    border: 1px solid #3a3e50; border-radius: 6px; color: #c8cad6;
+    font-family: 'Chakra Petch', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    transition: all .2s ease;
+  }
+  .youtube-link:hover { border-color: #ff4b55; color: #fff; background: rgba(255,75,85,.1); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255,75,85,0.2); }
+  
+  .youtube-icon { width: 14px; height: 10px; border-radius: 3px; background: #ff4b55; position: relative; display: inline-block; }
+  .youtube-icon::after { content: ""; position: absolute; left: 5px; top: 3px; border-left: 4px solid #fff; border-top: 2px solid transparent; border-bottom: 2px solid transparent; }
+  
+  .creator-credit { margin-top: 14px; font-size: 11px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+  .creator-credit strong { color: #c8cad6; }
+
+  footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px 20px 20px; line-height: 1.6; }
 </style>
 </head>
 <body>
 
 <div class="page">
-
-  <div class="rail">
-    <div class="ad-slot">ESPAÇO<br>PUBLICITÁRIO<br>300×600</div>
-  </div>
+  <div class="rail animate-in d-1"><div class="ad-slot">ESPAÇO<br>PUBLICITÁRIO<br>300×600</div></div>
 
   <div class="content">
+    <div class="creator-bar animate-in d-1">
+      
+      <!-- A imagem foi inserida aqui -->
+      <div class="creator-mark">
+        <img src="https://i.imgur.com/fA7YqA8.png" alt="Avatar do Jaraya">
+      </div>
 
-    <div class="creator-bar">
-      <div class="creator-mark"></div>
       <div class="creator-name">por <span>JARAYA</span></div>
       <a class="youtube-link" href="https://www.youtube.com/@Jarayaa" target="_blank" rel="noopener noreferrer" aria-label="Canal do Jaraya no YouTube">
-        <span class="youtube-icon"></span>
-        Meu YouTube
+        <span class="youtube-icon"></span> Meu YouTube
       </a>
     </div>
 
-    <header class="hero">
+    <header class="hero animate-in d-2">
       <div class="eyebrow">Vitrine de jogos Roblox</div>
       <h1 class="display">ROBLOX<span class="gem">•</span>HUB</h1>
       <p class="sub">Uma seleção fixa de jogos pra você jogar agora — sem cadastro, sem enrolação. Só escolher e entrar.</p>
       <div class="creator-credit">Curadoria de <strong>Jaraya</strong> · acompanhe no YouTube</div>
     </header>
 
-    <div class="ad-slot ad-slot-horizontal">ESPAÇO PUBLICITÁRIO — 728×90</div>
+    <div class="ad-slot ad-slot-horizontal animate-in d-3">ESPAÇO PUBLICITÁRIO — 728×90</div>
 
-    <!-- BLOCO 1: JOGOS RECOMENDADOS -->
-    <div class="section-label">Bloco 1 · Jogos recomendados</div>
-    <div class="section-sub">Três jogos, três estilos diferentes.</div>
-    <div class="game-row" id="recommended-row"></div>
-
-    <!-- BLOCO 2: JOGO DO DIA -->
-    <div class="section-label">Bloco 2 · Jogo do dia</div>
-    <div class="section-sub">Muda automaticamente a cada dia.</div>
-    <div class="day-card" id="day-card"></div>
-
-    <div class="ad-slot ad-slot-horizontal">ESPAÇO PUBLICITÁRIO — 728×90</div>
-
-    <!-- BLOCO 3: JOGO ALEATÓRIO -->
-    <div class="section-label">Bloco 3 · Jogo aleatório</div>
-    <div class="section-sub">Não sabe o que jogar? Deixa o hub escolher.</div>
-    <div class="random-panel">
-      <div class="random-title">Sem ideia do que jogar hoje?</div>
-      <div class="random-desc">Clique no botão e você será direcionado para um jogo aleatório do Roblox.</div>
-      <button class="random-btn" id="random-btn">🎲 Jogo aleatório</button>
-      <div class="random-result" id="random-result"></div>
+    <div class="animate-in d-3">
+      <h2 class="section-label">Jogos Recomendados</h2>
+      <div class="section-sub">Três jogos, três estilos diferentes.</div>
+      <div class="game-row" id="recommended-row"></div>
     </div>
 
-    <footer>
-    Criado por <strong>Jaraya</strong> ·
-    <a href="https://www.youtube.com/@Jarayaa" target="_blank" rel="noopener noreferrer">YouTube</a><br>
-    Links direcionam para o roblox.com. ROBLOX HUB não é afiliado à Roblox Corporation.
-  </footer>
+    <div class="animate-in d-4">
+      <h2 class="section-label">Jogo do Dia</h2>
+      <div class="section-sub">Muda automaticamente a cada dia.</div>
+      <div class="day-card" id="day-card"></div>
+    </div>
+
+    <div class="ad-slot ad-slot-horizontal animate-in d-4">ESPAÇO PUBLICITÁRIO — 728×90</div>
+
+    <div class="animate-in d-5">
+      <h2 class="section-label">Jogo Aleatório</h2>
+      <div class="section-sub">Não sabe o que jogar? Deixa o hub escolher.</div>
+      <div class="random-panel">
+        <div class="random-title">Sem ideia do que jogar hoje?</div>
+        <div class="random-desc">Clique no botão e você será direcionado para um jogo aleatório do Roblox.</div>
+        <button class="random-btn" id="random-btn">🎲 Jogo Aleatório</button>
+        <div class="random-result" id="random-result"></div>
+      </div>
+    </div>
+
+    <footer class="animate-in d-5">
+      Criado por <strong>Jaraya</strong> ·
+      <a href="https://www.youtube.com/@Jarayaa" target="_blank" rel="noopener noreferrer">YouTube</a><br>
+      Links direcionam para o roblox.com. ROBLOX HUB não é afiliado à Roblox Corporation.
+    </footer>
   </div>
 
-  <div class="rail">
-    <div class="ad-slot">ESPAÇO<br>PUBLICITÁRIO<br>300×600</div>
-  </div>
-
+  <div class="rail animate-in d-1"><div class="ad-slot">ESPAÇO<br>PUBLICITÁRIO<br>300×600</div></div>
 </div>
 
 <script>
-// ---- COVER ART (original geometric illustrations, not game screenshots) ----
 function coverJailbreak(){
   return `<svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
     <defs><linearGradient id="gj" x1="0" y1="0" x2="1" y2="1">
@@ -376,23 +409,10 @@ function coverWizard(){
   </svg>`;
 }
 
-// ---- GAME DATA (real Roblox links) ----
 const FEATURED = [
-  {
-    id:'jailbreak', title:'Jailbreak', dev:'Badimo', genre:'Ação / Mundo aberto',
-    blurb:'Vire policial ou fugitivo em um mundo aberto com carros, roubos e perseguições. Um clássico do Roblox desde 2017.',
-    link:'https://www.roblox.com/games/606849621/Jailbreak', cover:coverJailbreak
-  },
-  {
-    id:'ar2', title:'Apocalipse em Ascensão 2', dev:'Dualpoint Interactive', genre:'Sobrevivência / Zumbi',
-    blurb:'Sobreviva sozinho ou em grupo num arquipélago pós-apocalíptico, catando armas e fugindo dos infectados.',
-    link:'https://www.roblox.com/games/863266079/Apocalypse-Rising-2', cover:coverApocalypse
-  },
-  {
-    id:'wizardwest', title:'Mago Oeste', dev:"REDD's Wastelands", genre:'RPG / Fantasia',
-    blurb:'Combate mágico num cenário de faroeste: duelos com varinhas, vassouras voadoras e feitiços pra dominar.',
-    link:'https://www.roblox.com/games/17357719939/Wizard-West', cover:coverWizard
-  }
+  { id:'jailbreak', title:'Jailbreak', dev:'Badimo', genre:'Ação / Mundo aberto', blurb:'Vire policial ou fugitivo em um mundo aberto com carros, roubos e perseguições. Um clássico do Roblox desde 2017.', link:'https://www.roblox.com/games/606849621/Jailbreak', cover:coverJailbreak },
+  { id:'ar2', title:'Apocalipse em Ascensão 2', dev:'Dualpoint Interactive', genre:'Sobrevivência / Zumbi', blurb:'Sobreviva sozinho ou em grupo num arquipélago pós-apocalíptico, catando armas e fugindo dos infectados.', link:'https://www.roblox.com/games/863266079/Apocalypse-Rising-2', cover:coverApocalypse },
+  { id:'wizardwest', title:'Mago Oeste', dev:"REDD's Wastelands", genre:'RPG / Fantasia', blurb:'Combate mágico num cenário de faroeste: duelos com varinhas, vassouras voadoras e feitiços pra dominar.', link:'https://www.roblox.com/games/17357719939/Wizard-West', cover:coverWizard }
 ];
 
 const RANDOM_POOL = [
@@ -404,22 +424,22 @@ const RANDOM_POOL = [
   {title:'Brookhaven RP', link:'https://www.roblox.com/games/4924922222/Brookhaven-RP'}
 ];
 
-// ---- RENDER BLOCO 1 ----
 const row = document.getElementById('recommended-row');
 row.innerHTML = FEATURED.map(g => `
-  <div class="game-card">
-    <div class="cover">${g.cover()}</div>
-    <div class="game-info">
-      <div class="game-title">${g.title}</div>
-      <div class="game-dev">por ${g.dev}</div>
-      <div class="game-genre">${g.genre}</div>
-      <div class="game-blurb">${g.blurb}</div>
-      <a class="play-btn" href="${g.link}" target="_blank" rel="noopener noreferrer">Jogar ▶</a>
+  <div class="card-frame">
+    <div class="game-card">
+      <div class="cover">${g.cover()}</div>
+      <div class="game-info">
+        <div class="game-title">${g.title}</div>
+        <div class="game-dev">por ${g.dev}</div>
+        <div class="game-genre">${g.genre}</div>
+        <div class="game-blurb">${g.blurb}</div>
+        <a class="play-btn" href="${g.link}" target="_blank" rel="noopener noreferrer">Jogar ▶</a>
+      </div>
     </div>
   </div>
 `).join('');
 
-// ---- RENDER BLOCO 2 (game of the day — rotates daily) ----
 function dayIndex(){
   const now = new Date();
   const start = new Date(now.getFullYear(), 0, 0);
@@ -438,7 +458,6 @@ document.getElementById('day-card').innerHTML = `
   </div>
 `;
 
-// ---- BLOCO 3 (random game button) ----
 const randomBtn = document.getElementById('random-btn');
 const randomResult = document.getElementById('random-result');
 randomBtn.addEventListener('click', () => {
@@ -456,7 +475,8 @@ randomBtn.addEventListener('click', () => {
       setTimeout(() => {
         window.open(finalPick.link, '_blank', 'noopener,noreferrer');
         randomBtn.disabled = false;
-      }, 500);
+        randomResult.innerHTML = '';
+      }, 700);
     }
   }, 90);
 });
