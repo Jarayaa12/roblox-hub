@@ -346,130 +346,124 @@
 </div>
 
 <script>
-function coverJailbreak(){
-  return `<svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
-    <defs><linearGradient id="gj" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1a2140"/><stop offset="100%" stop-color="#0a0d1a"/>
-    </linearGradient></defs>
-    <rect width="400" height="225" fill="url(#gj)"/>
-    <circle cx="330" cy="45" r="55" fill="#ff3b57" opacity="0.15"/>
-    <circle cx="330" cy="45" r="20" fill="#4d9fff" opacity="0.5"/>
-    <g opacity="0.9">
-      <rect x="0" y="150" width="400" height="10" fill="#232840"/>
-      ${Array.from({length:14}).map((_,i)=>`<rect x="${i*30}" y="120" width="6" height="40" fill="#3a4066"/>`).join('')}
-    </g>
-    <rect x="60" y="165" width="150" height="35" rx="6" fill="#3652ff"/>
-    <rect x="60" y="165" width="150" height="12" fill="#ffb020"/>
-    <circle cx="90" cy="205" r="10" fill="#111"/>
-    <circle cx="180" cy="205" r="10" fill="#111"/>
-    <text x="20" y="30" font-family="Chakra Petch" font-size="15" fill="#4d9fff" letter-spacing="2">SEASON 33</text>
-  </svg>`;
-}
-function coverApocalypse(){
-  return `<svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
-    <defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#2b2013"/><stop offset="100%" stop-color="#100c07"/>
-    </linearGradient></defs>
-    <rect width="400" height="225" fill="url(#ga)"/>
-    <circle cx="80" cy="55" r="40" fill="#ffb020" opacity="0.12"/>
-    <g stroke="#ff6b3d" stroke-width="2" opacity="0.4">
-      <line x1="0" y1="180" x2="400" y2="150"/>
-      <line x1="0" y1="200" x2="400" y2="185"/>
-    </g>
-    <g transform="translate(200,110)" fill="#c9c2b0">
-      <circle r="34"/>
-      <circle cx="-13" cy="-6" r="7" fill="#100c07"/>
-      <circle cx="13" cy="-6" r="7" fill="#100c07"/>
-      <path d="M -10 16 Q 0 26 10 16" stroke="#100c07" stroke-width="4" fill="none"/>
-      <path d="M -18 -20 L -6 -30 M 18 -20 L 6 -30" stroke="#100c07" stroke-width="4"/>
-    </g>
-    <text x="20" y="205" font-family="Chakra Petch" font-size="13" fill="#ff6b3d" letter-spacing="2">SURVIVAL SHOOTER</text>
-  </svg>`;
-}
-function coverWizard(){
-  return `<svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
-    <defs><linearGradient id="gw" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#3a2340"/><stop offset="60%" stop-color="#7a4a2a"/><stop offset="100%" stop-color="#c98a3f"/>
-    </linearGradient></defs>
-    <rect width="400" height="225" fill="url(#gw)"/>
-    <circle cx="330" cy="40" r="24" fill="#ffe3a0" opacity="0.8"/>
-    <g fill="#1c1220" opacity="0.85">
-      <ellipse cx="200" cy="190" rx="220" ry="35"/>
-    </g>
-    <g transform="translate(210,150)">
-      <path d="M -25 30 L 0 -40 L 25 30 Z" fill="#4a2e1a"/>
-      <ellipse cx="0" cy="30" rx="34" ry="8" fill="#3a2314"/>
-      <path d="M -3 -40 L 20 -55" stroke="#b366ff" stroke-width="4"/>
-      <circle cx="20" cy="-55" r="4" fill="#b366ff"/>
-    </g>
-    <g stroke="#ffe3a0" stroke-width="2" opacity="0.7">
-      <line x1="80" y1="60" x2="86" y2="66"/><line x1="80" y1="66" x2="86" y2="60"/>
-      <line x1="300" y1="90" x2="308" y2="98"/><line x1="300" y1="98" x2="308" y2="90"/>
-    </g>
-    <text x="20" y="205" font-family="Chakra Petch" font-size="13" fill="#ffe3a0" letter-spacing="2">FAR WEST FANTASY</text>
-  </svg>`;
-}
-
+// ---- CONFIGURAÇÃO DOS JOGOS ----
 const FEATURED = [
-  { id:'jailbreak', title:'Jailbreak', dev:'Badimo', genre:'Ação / Mundo aberto', blurb:'Vire policial ou fugitivo em um mundo aberto com carros, roubos e perseguições. Um clássico do Roblox desde 2017.', link:'https://www.roblox.com/games/606849621/Jailbreak', cover:coverJailbreak },
-  { id:'ar2', title:'Apocalipse em Ascensão 2', dev:'Dualpoint Interactive', genre:'Sobrevivência / Zumbi', blurb:'Sobreviva sozinho ou em grupo num arquipélago pós-apocalíptico, catando armas e fugindo dos infectados.', link:'https://www.roblox.com/games/863266079/Apocalypse-Rising-2', cover:coverApocalypse },
-  { id:'wizardwest', title:'Mago Oeste', dev:"REDD's Wastelands", genre:'RPG / Fantasia', blurb:'Combate mágico num cenário de faroeste: duelos com varinhas, vassouras voadoras e feitiços pra dominar.', link:'https://www.roblox.com/games/17357719939/Wizard-West', cover:coverWizard }
+  { 
+    title: '99 Noites na Floresta', 
+    dev: 'Seu Nome / Estúdio', 
+    genre: 'Sobrevivência / Aventura', 
+    blurb: 'Sobreviva aos perigos e mistérios escondidos na floresta. Quantas noites você consegue durar?', 
+    // IMPORTANTE: Troque o link abaixo pelo link real do seu jogo no Roblox para a capa funcionar!
+    link: 'https://www.roblox.com/pt/games/79546208627805/99-Nights-in-the-Forest' 
+  },
+  { 
+    title: 'Jailbreak', 
+    dev: 'Badimo', 
+    genre: 'Ação / Mundo aberto', 
+    blurb: 'Vire policial ou fugitivo em um mundo aberto com carros, roubos e perseguições. Um clássico do Roblox desde 2017.', 
+    link: 'https://www.roblox.com/games/606849621/Jailbreak'
+  },
+  { 
+    title: 'Apocalipse em Ascensão 2', 
+    dev: 'Dualpoint Interactive', 
+    genre: 'Sobrevivência / Zumbi', 
+    blurb: 'Sobreviva sozinho ou em grupo num arquipélago pós-apocalíptico, catando armas e fugindo dos infectados.', 
+    link: 'https://www.roblox.com/games/863266079/Apocalypse-Rising-2'
+  }
 ];
 
 const RANDOM_POOL = [
   ...FEATURED,
   {title:'Adopt Me!', link:'https://www.roblox.com/games/920587237/Adopt-Me'},
   {title:'Blox Fruits', link:'https://www.roblox.com/games/2753915549/Blox-Fruits'},
-  {title:'Tower of Hell', link:'https://www.roblox.com/games/1962086868/Tower-of-Hell'},
-  {title:'Piggy', link:'https://www.roblox.com/games/4623386862/Piggy'},
-  {title:'Brookhaven RP', link:'https://www.roblox.com/games/4924922222/Brookhaven-RP'}
+  {title:'Mago Oeste', link:'https://www.roblox.com/games/17357719939/Wizard-West'}
 ];
 
-const row = document.getElementById('recommended-row');
-row.innerHTML = FEATURED.map(g => `
-  <div class="card-frame">
-    <div class="game-card">
-      <div class="cover">${g.cover()}</div>
-      <div class="game-info">
-        <div class="game-title">${g.title}</div>
-        <div class="game-dev">por ${g.dev}</div>
-        <div class="game-genre">${g.genre}</div>
-        <div class="game-blurb">${g.blurb}</div>
-        <a class="play-btn" href="${g.link}" target="_blank" rel="noopener noreferrer">Jogar ▶</a>
-      </div>
-    </div>
-  </div>
-`).join('');
+// ---- FUNÇÃO PARA BUSCAR A CAPA AUTOMATICAMENTE ----
+async function getRobloxThumbnail(url) {
+  try {
+    // 1. Extrai o ID do jogo a partir do link
+    const match = url.match(/\/games\/(\d+)/);
+    if (!match) throw new Error("Link inválido");
+    
+    const placeId = match[1];
+    
+    // 2. Converte o Place ID para Universe ID
+    const uniRes = await fetch(`https://apis.roproxy.com/universes/v1/places/${placeId}/universe`);
+    const uniData = await uniRes.json();
+    const universeId = uniData.universeId;
 
-function dayIndex(){
-  const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 0);
-  const diff = now - start;
-  const dayOfYear = Math.floor(diff / 86400000);
-  return dayOfYear % FEATURED.length;
+    // 3. Busca a imagem em alta resolução (16:9)
+    const thumbRes = await fetch(`https://thumbnails.roproxy.com/v1/games/multiget/thumbnails?universeIds=${universeId}&countPerUniverse=1&defaults=true&size=768x432&format=Png&isCircular=false`);
+    const thumbData = await thumbRes.json();
+    
+    return thumbData.data[0].thumbnails[0].imageUrl;
+  } catch (error) {
+    console.error("Erro ao buscar imagem:", error);
+    // Retorna uma imagem padrão de erro caso o link esteja errado ou a API falhe
+    return 'https://via.placeholder.com/768x432/12141d/4d9fff?text=CAPA+NÃO+ENCONTRADA'; 
+  }
 }
-const todayGame = FEATURED[dayIndex()];
-document.getElementById('day-card').innerHTML = `
-  <div class="day-cover">${todayGame.cover()}</div>
-  <div class="day-info">
-    <div class="day-badge">★ Escolha de hoje</div>
-    <div class="day-title">${todayGame.title}</div>
-    <div class="day-blurb">${todayGame.blurb}</div>
-    <a class="day-play" href="${todayGame.link}" target="_blank" rel="noopener noreferrer">Jogar agora ▶</a>
-  </div>
-`;
 
+// ---- RENDERIZAR BLOCO 1 E 2 ASSINCRONAMENTE ----
+async function renderGames() {
+  const row = document.getElementById('recommended-row');
+  const dayCard = document.getElementById('day-card');
+  
+  row.innerHTML = '<div style="color: var(--muted); padding: 20px; grid-column: 1 / -1; text-align: center;">Carregando capas automáticas...</div>';
+
+  let rowHtml = '';
+  for (const g of FEATURED) {
+    const imageUrl = await getRobloxThumbnail(g.link);
+    rowHtml += `
+      <div class="card-frame">
+        <div class="game-card">
+          <div class="cover">
+            <img src="${imageUrl}" alt="Capa de ${g.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+          </div>
+          <div class="game-info">
+            <div class="game-title">${g.title}</div>
+            <div class="game-dev">por ${g.dev}</div>
+            <div class="game-genre">${g.genre}</div>
+            <div class="game-blurb">${g.blurb}</div>
+            <a class="play-btn" href="${g.link}" target="_blank" rel="noopener noreferrer">Jogar ▶</a>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  row.innerHTML = rowHtml;
+
+  const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+  const todayGame = FEATURED[dayOfYear % FEATURED.length];
+  const todayImageUrl = await getRobloxThumbnail(todayGame.link);
+  
+  dayCard.innerHTML = `
+    <div class="day-cover">
+      <img src="${todayImageUrl}" alt="Capa de ${todayGame.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+    </div>
+    <div class="day-info">
+      <div class="day-badge">★ Escolha de hoje</div>
+      <div class="day-title">${todayGame.title}</div>
+      <div class="day-blurb">${todayGame.blurb}</div>
+      <a class="day-play" href="${todayGame.link}" target="_blank" rel="noopener noreferrer">Jogar agora ▶</a>
+    </div>
+  `;
+}
+
+renderGames();
+
+// ---- LÓGICA DO BOTÃO ALEATÓRIO ----
 const randomBtn = document.getElementById('random-btn');
 const randomResult = document.getElementById('random-result');
 randomBtn.addEventListener('click', () => {
   randomBtn.disabled = true;
   let ticks = 0;
-  const maxTicks = 10;
   const interval = setInterval(() => {
     const pick = RANDOM_POOL[Math.floor(Math.random() * RANDOM_POOL.length)];
     randomResult.innerHTML = `Sorteando... <strong>${pick.title}</strong>`;
     ticks++;
-    if(ticks >= maxTicks){
+    if(ticks >= 10){
       clearInterval(interval);
       const finalPick = RANDOM_POOL[Math.floor(Math.random() * RANDOM_POOL.length)];
       randomResult.innerHTML = `Escolhido: <strong>${finalPick.title}</strong> — abrindo...`;
