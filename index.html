@@ -3,7 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ROBLOX HUB — Jogos Recomendados</title>
+<title>ROBLOX HUB | Jogos Roblox Recomendados por Jaraya</title>
+<meta name="description" content="Roblox Hub do Jaraya: jogos Roblox recomendados, códigos Roblox, jogo do dia, jogos aleatórios e dicas selecionadas para você encontrar o que jogar.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Jaraya">
+<link rel="canonical" href="https://jarayaa12.github.io/roblox-hub/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ROBLOX HUB | Jogos Roblox Recomendados">
+<meta property="og:description" content="Jogos Roblox selecionados por Jaraya, com jogo do dia e recomendações para jogar agora.">
+<meta property="og:url" content="https://jarayaa12.github.io/roblox-hub/">
+<meta property="og:site_name" content="ROBLOX HUB">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"ROBLOX HUB","url":"https://jarayaa12.github.io/roblox-hub/","description":"Jogos Roblox recomendados, códigos e guias selecionados por Jaraya.","author":{"@type":"Person","name":"Jaraya","url":"https://www.youtube.com/@Jarayaa"}}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -279,14 +293,33 @@
   .creator-credit strong { color: #c8cad6; }
 
   footer { text-align: center; color: var(--muted); font-size: 12px; padding: 40px 20px 20px; line-height: 1.6; }
+
+  .site-nav{position:sticky;top:0;z-index:50;display:flex;justify-content:center;flex-wrap:wrap;gap:8px;padding:10px 16px;background:rgba(10,11,16,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+  .site-nav a{color:#bfc3d6;font-family:'Chakra Petch',sans-serif;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:8px 11px;border-radius:5px}
+  .site-nav a:hover{color:#fff;background:rgba(179,102,255,.10)}
+  .intro-block,.info-block{margin:0 20px;padding:26px 24px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+  .intro-block p,.info-block p{color:#aeb2c5;font-size:14px;line-height:1.75}
+  .info-block h2{margin-bottom:12px;font-size:24px}
+  .info-block a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+  @media(max-width:640px){.site-nav{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}.site-nav a{white-space:nowrap}}
 </style>
 </head>
 <body>
 
 <div class="page">
-  <div class="rail animate-in d-1"><div class="ad-slot">ESPAÇO<br>PUBLICITÁRIO<br>300×600</div></div>
+  <div class="rail animate-in d-1"><div class="ad-slot">ESPAÇO RESERVADO<br>PARA PUBLICIDADE<br>300×600</div></div>
 
   <div class="content">
+
+<nav class="site-nav" aria-label="Navegação principal">
+  <a href="#jogos">Jogos</a>
+  <a href="#jogo-do-dia">Jogo do Dia</a>
+  <a href="#aleatorio">Aleatório</a>
+  <a href="#codigos">Códigos</a>
+  <a href="#sobre">Sobre</a>
+  <a href="#privacidade">Privacidade</a>
+</nav>
+
     <div class="creator-bar animate-in d-1">
       
       <!-- A imagem foi inserida aqui -->
@@ -308,30 +341,74 @@
       <div class="creator-credit">Curadoria de <strong>Jaraya</strong> · acompanhe no YouTube</div>
     </header>
 
-    <div class="ad-slot ad-slot-horizontal animate-in d-3">ESPAÇO PUBLICITÁRIO — 728×90</div>
+    <div class="ad-slot ad-slot-horizontal animate-in d-3">ESPAÇO RESERVADO PARA PUBLICIDADE — 728×90</div>
+
+
+      <div class="intro-block animate-in d-3">
+        <p><strong>O que é o Roblox Hub?</strong> Este é um espaço de curadoria criado por Jaraya para descobrir experiências do Roblox sem precisar ficar procurando no escuro. Os jogos são selecionados e descritos de forma independente, com foco em experiências que vale a pena testar.</p>
+      </div>
 
     <div class="animate-in d-3">
-      <h2 class="section-label">Jogos Recomendados</h2>
+      <h2 class="section-label" id="jogos">Jogos Recomendados</h2>
       <div class="section-sub">Três jogos, três estilos diferentes.</div>
       <div class="game-row" id="recommended-row"></div>
     </div>
 
     <div class="animate-in d-4">
-      <h2 class="section-label">Jogo do Dia</h2>
+      <h2 class="section-label" id="jogo-do-dia">Jogo do Dia</h2>
       <div class="section-sub">Muda automaticamente a cada dia.</div>
       <div class="day-card" id="day-card"></div>
     </div>
 
-    <div class="ad-slot ad-slot-horizontal animate-in d-4">ESPAÇO PUBLICITÁRIO — 728×90</div>
+    <div class="ad-slot ad-slot-horizontal animate-in d-4">ESPAÇO RESERVADO PARA PUBLICIDADE — 728×90</div>
 
     <div class="animate-in d-5">
-      <h2 class="section-label">Jogo Aleatório</h2>
+      <h2 class="section-label" id="aleatorio">Jogo Aleatório</h2>
       <div class="section-sub">Não sabe o que jogar? Deixa o hub escolher.</div>
       <div class="random-panel">
         <div class="random-title">Sem ideia do que jogar hoje?</div>
         <div class="random-desc">Clique no botão e você será direcionado para um jogo aleatório do Roblox.</div>
-        <button class="random-btn" id="random-btn">🎲 Jogo Aleatório</button>
+        <button class="random-btn" id="random-btn" aria-label="Escolher um jogo aleatório do Roblox">🎲 Jogo Aleatório</button>
         <div class="random-result" id="random-result"></div>
+      </div>
+    </div>
+
+
+
+    <div class="animate-in d-5">
+      <h2 class="section-label" id="codigos">Códigos Roblox</h2>
+      <div class="info-block">
+        <p><strong>Encontre códigos de jogos Roblox em um só lugar.</strong> A ideia desta seção é reunir códigos ativos, recompensas e instruções para resgate, sempre deixando claro quando um código foi verificado.</p>
+
+        <div style="margin-top:18px;display:grid;gap:10px;">
+          <div style="padding:14px;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.02);">
+            <strong>🎮 Jogo</strong><br>
+            <span style="color:#aeb2c5;">Adicione aqui os jogos que possuem códigos.</span>
+          </div>
+          <div style="padding:14px;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.02);">
+            <strong>🔑 Código</strong><br>
+            <span style="color:#aeb2c5;">Exemplo: CODIGO123</span>
+          </div>
+          <div style="padding:14px;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.02);">
+            <strong>🎁 Recompensa</strong><br>
+            <span style="color:#aeb2c5;">Descreva o item, moeda ou bônus recebido.</span>
+          </div>
+        </div>
+
+        <p style="margin-top:18px;">💡 Para SEO, cada jogo poderá ganhar uma página própria de códigos, com lista de códigos ativos, códigos expirados, recompensas e passo a passo para resgatar.</p>
+      </div>
+    </div>
+
+    <div class="animate-in d-5">
+      <h2 class="section-label" id="sobre">Sobre o Roblox Hub</h2>
+      <div class="info-block">
+        <p>O Roblox Hub é um projeto independente de curadoria de jogos Roblox. A proposta é reunir recomendações, links para experiências e conteúdo produzido pelo Jaraya em um só lugar. O site não é afiliado, patrocinado ou oficialmente associado à Roblox Corporation.</p>
+      </div>
+    </div>
+    <div class="animate-in d-5">
+      <h2 class="section-label" id="privacidade">Privacidade</h2>
+      <div class="info-block">
+        <p>O site não solicita cadastro nem senha do Roblox. Links para jogar levam ao domínio oficial do Roblox. Se forem adicionados serviços de análise, publicidade ou formulários no futuro, esta seção deverá ser atualizada para explicar claramente quais dados são coletados, para qual finalidade e como o visitante pode exercer seus direitos.</p>
       </div>
     </div>
 
@@ -342,7 +419,7 @@
     </footer>
   </div>
 
-  <div class="rail animate-in d-1"><div class="ad-slot">ESPAÇO<br>PUBLICITÁRIO<br>300×600</div></div>
+  <div class="rail animate-in d-1"><div class="ad-slot">ESPAÇO RESERVADO<br>PARA PUBLICIDADE<br>300×600</div></div>
 </div>
 
 <script>
@@ -419,7 +496,7 @@ async function renderGames() {
       <div class="card-frame">
         <div class="game-card">
           <div class="cover">
-            <img src="${imageUrl}" alt="Capa de ${g.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+            <img src="${imageUrl}" loading="lazy" decoding="async" alt="Capa do jogo ${g.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
           </div>
           <div class="game-info">
             <div class="game-title">${g.title}</div>
@@ -440,7 +517,7 @@ async function renderGames() {
   
   dayCard.innerHTML = `
     <div class="day-cover">
-      <img src="${todayImageUrl}" alt="Capa de ${todayGame.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+      <img src="${todayImageUrl}" loading="lazy" decoding="async" alt="Capa do jogo ${todayGame.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
     </div>
     <div class="day-info">
       <div class="day-badge">★ Escolha de hoje</div>
